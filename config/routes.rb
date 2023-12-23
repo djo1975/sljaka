@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'searches/index'
   post 'searches/save_query', to: 'searches#save_query'
   get 'home/welcome'
-  root to: "home#welcome"
+  root to: 'home#welcome'
   get 'analyses', to: 'analyses#index'
   # Koristite delete umesto get za odjavljivanje i dodajte devise_scope blok
   devise_scope :user do

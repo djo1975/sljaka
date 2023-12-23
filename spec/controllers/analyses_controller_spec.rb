@@ -21,8 +21,8 @@ RSpec.describe AnalysesController, type: :controller do
       end
 
       it 'filters my_searches by date range' do
-        search1 = Search.create(user: user, query: 'Test 1', created_at: 1.day.ago)
-        search2 = Search.create(user: user, query: 'Test 2', created_at: Time.current)
+        search1 = Search.create(user:, query: 'Test 1', created_at: 1.day.ago)
+        search2 = Search.create(user:, query: 'Test 2', created_at: Time.current)
 
         get :index, params: { my_start_date: 2.days.ago.to_date, my_end_date: Time.current.to_date }
 
@@ -31,8 +31,8 @@ RSpec.describe AnalysesController, type: :controller do
       end
 
       it 'filters all_searches by date range' do
-        search1 = Search.create(user: user, query: 'Test 1', created_at: 1.day.ago)
-        search2 = Search.create(user: user, query: 'Test 2', created_at: Time.current)
+        search1 = Search.create(user:, query: 'Test 1', created_at: 1.day.ago)
+        search2 = Search.create(user:, query: 'Test 2', created_at: Time.current)
 
         get :index, params: { all_start_date: 2.days.ago.to_date, all_end_date: Time.current.to_date }
 
