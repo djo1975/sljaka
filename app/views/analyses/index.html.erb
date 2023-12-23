@@ -1,4 +1,5 @@
 <!-- app/views/analyses/index.html.erb -->
+<%= stylesheet_link_tag 'analyses', media: 'all' %>
 <h2>Search Analyses</h2>
 <%= link_to 'Back to Search', searches_index_path %>
 <%= link_to 'Download CSV', analyses_path(format: 'csv', start_date: params[:start_date], end_date: params[:end_date]) %>

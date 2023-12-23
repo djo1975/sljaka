@@ -1,14 +1,187 @@
-<!-- app/views/searches/index.html.erb -->
-<h2>Search</h2>
-<%= link_to 'Analyses', analyses_path %>
-<%= form_tag searches_save_query_path, method: :post do %>
-  <%= text_field_tag :query, params[:query], placeholder: 'Enter your search query' %>
-  <%= submit_tag 'Search' %>
-<% end %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RealTimeSearchApp</title>
 
-<% if user_signed_in? %>
-  <p>Signed in as <%= current_user.email %>. <%= link_to 'Sign out', destroy_user_session_path, method: :delete %></p>
-<% else %>
-  <%= link_to 'Sign in', new_user_session_path %>
-  <%= link_to 'Sign up', new_user_registration_path %>
-<% end %>
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto; 
+      padding: 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    nav {
+    background-color: #007bff;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    margin-left: -3rem;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+    }
+
+    #search-box {
+      width: 100%;
+      max-width: 400px;
+      margin: 60px auto 20px; 
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #d4edda; 
+    }
+
+    #search-box input[type="text"] {
+      width: calc(100% - 20px);
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    #search-box input[type="submit"] {
+      background-color: #28a745; 
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    #user-info {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    #analyses-link {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    #analyses-link a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    #analyses-link a:hover {
+      text-decoration: underline;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+   
+    #destroy_user_session {
+      color: #dc3545;
+    }
+
+    #destroy_user_session:hover {
+      text-decoration: underline;
+    }
+
+ 
+    #message {
+      color: #28a745;
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      margin-right: 2rem;
+    }
+  </style>
+
+
+  <script>
+    function showNotification(message) {
+      var notification = document.getElementById('message');
+      notification.textContent = message;
+      notification.style.display = 'block';
+      setTimeout(function() {
+        notification.style.display = 'none';
+      }, 6000);
+    }
+
+    function validateInput() {
+      var input = document.getElementById('query');
+      var inputValue = input.value.trim();
+      var pattern = /^.*\?+.*$/;
+
+      if (!pattern.test(inputValue)) {
+        showNotification('Please, use the "?" in Requests.');
+        return false;
+      }
+
+      showNotification('Successfully completed!'); 
+      return true;
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <% if user_signed_in? %>
+        <%= link_to 'Sign out', destroy_user_session_path, method: :delete, id: 'destroy_user_session' %>
+      <% end %>
+      <%= link_to 'Analyses-Page', analyses_path %>
+    </nav>
+
+    <h1>RealTimeSearchApp</h1>
+
+    <div id="search-box">
+      <%= form_tag searches_save_query_path, method: :post, onsubmit: 'return validateInput()' do %>
+        <%= text_field_tag :query, params[:query], placeholder: 'Enter your search query', id: 'query' %>
+        <%= submit_tag 'Search' %>
+      <% end %>
+      <div id="message" style="display: none;"></div>
+    </div>
+
+    <% if user_signed_in? %>
+      <div id="user-info">
+        <p>Signed in as <%= current_user.email %>.</p>
+      </div>
+    <% else %>
+      <div id="user-links">
+        <%= link_to 'Sign in', new_user_session_path %>
+        <%= link_to 'Sign up', new_user_registration_path %>
+      </div>
+    <% end %>
+
+    <div id="analyses-link">
+      <%= link_to 'Analyses-Page', analyses_path %>
+    </div>
+  </div>
+</body>
+</html>
