@@ -1,0 +1,21 @@
+# config/database.yml
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch("DATABASE_USERNAME") { "djo" } %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") { "cicibu" } %>
+  host: localhost
+
+development:
+  <<: *default
+  database: RealTimeSearchApp
+
+test:
+  <<: *default
+  database: RealTimeSearchApp
+
+production:
+  <<: *default
+  database: RealTimeSearchApp

@@ -1,0 +1,13 @@
+<!-- app/views/searches/index.html.erb -->
+<h2>Search</h2>
+<%= form_tag searches_index_path, method: :get do %>
+  <%= text_field_tag :query, params[:query], placeholder: 'Enter your search query' %>
+  <%= submit_tag 'Search' %>
+<% end %>
+
+<% if user_signed_in? %>
+  <p>Signed in as <%= current_user.email %>. <%= link_to 'Sign out', destroy_user_session_path, method: :delete %></p>
+<% else %>
+  <%= link_to 'Sign in', new_user_session_path %>
+  <%= link_to 'Sign up', new_user_registration_path %>
+<% end %>
