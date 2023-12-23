@@ -1,12 +1,72 @@
 <!-- app/views/analyses/index.html.erb -->
 <h2>Search Analyses</h2>
 <%= link_to 'Back to Search', searches_index_path %>
-<% if @searches.present? %>
-  <ul>
-    <% @searches.each do |search| %>
-      <li><%= search.query %></li>
-    <% end %>
-  </ul>
+<%= link_to 'Download CSV', analyses_path(format: 'csv', start_date: params[:start_date], end_date: params[:end_date]) %>
+
+<h3>My Searches</h3>
+<%= form_tag analyses_path, method: :get do %>
+  <%= label_tag 'my_start_date', 'Start Date' %>
+  <%= text_field_tag 'my_start_date', params[:my_start_date], type: 'date' %>
+
+  <%= label_tag 'my_end_date', 'End Date' %>
+  <%= text_field_tag 'my_end_date', params[:my_end_date], type: 'date' %>
+
+  <%= submit_tag 'Filter My Searches' %>
+<% end %>
+
+<% if @my_searches.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Query</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @my_searches.each do |search| %>
+        <tr>
+          <td><%= search.user.email %></td>
+          <td><%= search.query %></td>
+          <td><%= search.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% else %>
   <p>No saved searches.</p>
+<% end %>
+
+<h3>All Searches</h3>
+<%= form_tag analyses_path, method: :get do %>
+  <%= label_tag 'all_start_date', 'Start Date' %>
+  <%= text_field_tag 'all_start_date', params[:all_start_date], type: 'date' %>
+
+  <%= label_tag 'all_end_date', 'End Date' %>
+  <%= text_field_tag 'all_end_date', params[:all_end_date], type: 'date' %>
+
+  <%= submit_tag 'Filter All Searches' %>
+<% end %>
+
+<% if @all_searches.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Query</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @all_searches.each do |search| %>
+        <tr>
+          <td><%= search.user.email %></td>
+          <td><%= search.query %></td>
+          <td><%= search.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No saved searches from all users.</p>
 <% end %>
