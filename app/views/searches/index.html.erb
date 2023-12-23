@@ -1,5 +1,6 @@
 <!-- app/views/searches/index.html.erb -->
 <h2>Search</h2>
+<%= link_to 'Analyses', analyses_path %>
 <%= form_tag searches_index_path, method: :get do %>
   <%= text_field_tag :query, params[:query], placeholder: 'Enter your search query' %>
   <%= submit_tag 'Search' %>

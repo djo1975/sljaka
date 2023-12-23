@@ -1,0 +1,12 @@
+<!-- app/views/analyses/index.html.erb -->
+<h2>Search Analyses</h2>
+<%= link_to 'Back to Search', searches_index_path %>
+<% if @searches.present? %>
+  <ul>
+    <% @searches.each do |search| %>
+      <li><%= search.query %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No saved searches.</p>
+<% end %>

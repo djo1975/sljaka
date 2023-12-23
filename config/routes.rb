@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'searches/index'
   get 'home/welcome'
   root to: "home#welcome"
-
+  get 'analyses', to: 'analyses#index'
   # Koristite delete umesto get za odjavljivanje i dodajte devise_scope blok
   devise_scope :user do
     get 'users/sign_out', to: 'devise/sessions#destroy', as: :custom_destroy_user_session
