@@ -32,7 +32,7 @@ The emphasis is not on the search functionality itself but on the analytics behi
 
 
 ## Video Link 🚀
-[Video here]()
+[Video here](https://www.loom.com/share/8b065f8dd57a49149def4c2c6ec1d39a?sid=614ae543-6f93-427f-a0aa-e99f4376251e)
 
 ## Render Deploy 🚀
 
