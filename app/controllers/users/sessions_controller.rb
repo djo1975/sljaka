@@ -4,3 +4,4 @@ class Users::SessionsController < Devise::SessionsController
     search_path
   end
 end
+

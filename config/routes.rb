@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     get 'users/sign_out', to: 'devise/sessions#destroy', as: :custom_destroy_user_session
   end
 
-  devise_for :users, controllers: {
-    sessions: 'devise/sessions'
-  }
+  devise_for :users, controllers: { sessions: 'users/sessions' }
+
 end
