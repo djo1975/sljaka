@@ -36,7 +36,7 @@ The emphasis is not on the search functionality itself but on the analytics behi
 
 ## Render Deploy 🚀
 
-[Live demo here](https://mysite-5r8f.onrender.com/)
+[Live demo here](https://mysite-5r8f.onrender.com)
 
 ## 🛠 Built With <a name="built-with"></a>
 HTML
